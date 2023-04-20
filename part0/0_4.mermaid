@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant browser
+    participant server
+    participant database
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server->>database: INSERT new note to database
+    activate database
+    database-->>server: success
+    deactivate database
+    server-->>browser: 302 Redirect to https://studies.cs.helsinki.fi/exampleapp/notes
+    deactivate server
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: Updated list of notes
+    deactivate server
